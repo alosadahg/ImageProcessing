@@ -1,0 +1,17 @@
+E:\C# Projects\Image_Processing\ImageProcessing\ImageProcessing\bin\Debug\net8.0-windows\ImageProcessing.exe
+E:\C# Projects\Image_Processing\ImageProcessing\ImageProcessing\bin\Debug\net8.0-windows\ImageProcessing.deps.json
+E:\C# Projects\Image_Processing\ImageProcessing\ImageProcessing\bin\Debug\net8.0-windows\ImageProcessing.runtimeconfig.json
+E:\C# Projects\Image_Processing\ImageProcessing\ImageProcessing\bin\Debug\net8.0-windows\ImageProcessing.dll
+E:\C# Projects\Image_Processing\ImageProcessing\ImageProcessing\bin\Debug\net8.0-windows\ImageProcessing.pdb
+E:\C# Projects\Image_Processing\ImageProcessing\ImageProcessing\obj\Debug\net8.0-windows\ImageProcessing.Form1.resources
+E:\C# Projects\Image_Processing\ImageProcessing\ImageProcessing\obj\Debug\net8.0-windows\ImageProcessing.csproj.GenerateResource.cache
+E:\C# Projects\Image_Processing\ImageProcessing\ImageProcessing\obj\Debug\net8.0-windows\ImageProcessing.GeneratedMSBuildEditorConfig.editorconfig
+E:\C# Projects\Image_Processing\ImageProcessing\ImageProcessing\obj\Debug\net8.0-windows\ImageProcessing.AssemblyInfoInputs.cache
+E:\C# Projects\Image_Processing\ImageProcessing\ImageProcessing\obj\Debug\net8.0-windows\ImageProcessing.AssemblyInfo.cs
+E:\C# Projects\Image_Processing\ImageProcessing\ImageProcessing\obj\Debug\net8.0-windows\ImageProcessing.csproj.CoreCompileInputs.cache
+E:\C# Projects\Image_Processing\ImageProcessing\ImageProcessing\obj\Debug\net8.0-windows\ImageProcessing.dll
+E:\C# Projects\Image_Processing\ImageProcessing\ImageProcessing\obj\Debug\net8.0-windows\refint\ImageProcessing.dll
+E:\C# Projects\Image_Processing\ImageProcessing\ImageProcessing\obj\Debug\net8.0-windows\ImageProcessing.pdb
+E:\C# Projects\Image_Processing\ImageProcessing\ImageProcessing\obj\Debug\net8.0-windows\ImageProcessing.genruntimeconfig.cache
+E:\C# Projects\Image_Processing\ImageProcessing\ImageProcessing\obj\Debug\net8.0-windows\ref\ImageProcessing.dll
+E:\C# Projects\Image_Processing\ImageProcessing\ImageProcessing\bin\Debug\net8.0-windows\DIPLib\avicap32.dll

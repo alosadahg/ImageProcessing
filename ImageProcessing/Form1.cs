@@ -4,6 +4,8 @@ using System.Windows.Forms;
 using WebCamLib;
 using ImageProcess2;
 using HNUDIP;
+using AForge.Video;
+using AForge.Video.DirectShow;
 
 namespace ImageProcessing
 {
@@ -17,6 +19,8 @@ namespace ImageProcessing
         Boolean isCamera;
         Device selectedDevice;
         Device[] devices;
+        FilterInfoCollection videoDevices;
+        VideoCaptureDevice videoSource;
         public Form1()
         {
             InitializeComponent();
@@ -26,8 +30,13 @@ namespace ImageProcessing
 
         private void btnUploadImg_Click(object sender, EventArgs e)
         {
-            if(selectedDevice!=null)
-            selectedDevice.Stop();
+            if (videoSource != null && videoSource.IsRunning)
+            {
+                videoSource.SignalToStop();
+                videoSource.WaitForStop();
+            }
+            /*if (selectedDevice != null)
+                selectedDevice.Stop();*/
             lblCamera.Visible = false;
             cbCameraOpts.Visible = false;
             OpenFileDialog open = new OpenFileDialog();
@@ -147,7 +156,7 @@ namespace ImageProcessing
         private void btnSubtract_Click(object sender, EventArgs e)
         {
             // ImageProcess.Subtract(ref loaded, ref background, ref processed, 100);
-            Color mygreen = loaded.GetPixel(0,0);
+            Color mygreen = loaded.GetPixel(0, 0);
             int greygreen = (mygreen.R + mygreen.G + mygreen.B) / 3;
             int threshold = 5;
             for (int x = 0; x < loaded.Width; x++)
@@ -239,28 +248,49 @@ namespace ImageProcessing
 
         private void btnCamera_Click(object sender, EventArgs e)
         {
-            lblCamera.Visible = true;
+            /*lblCamera.Visible = true;
             cbCameraOpts.Visible = true;
             devices = DeviceManager.GetAllDevices();
-            if(devices.Length > 0)
+            if (devices.Length > 0)
             {
                 selectedDevice = DeviceManager.GetDevice(0);
                 selectedDevice.ShowWindow(pbInput);
+            }*/
+            lblCamera.Visible = true;
+            cbCameraOpts.Visible = true;
+            videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            foreach (FilterInfo device in videoDevices)
+            {
+                cbCameraOpts.Items.Add(device.Name);
             }
-            
+            videoSource = new VideoCaptureDevice();
         }
-
-      /*  private void timer1_Tick(object sender, EventArgs e)
-        {            
-            
-        }*/
 
         private void cbCameraOpts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedDevice = DeviceManager.GetDevice(cbCameraOpts.SelectedIndex);
-            selectedDevice.Init(pbInput.Height, pbInput.Width, pbInput.Handle.ToInt32());
-            timer1.Enabled = true;
-            btnBackground.Enabled = true;
+            videoSource = new VideoCaptureDevice(videoDevices[cbCameraOpts.SelectedIndex].MonikerString);
+            videoSource.NewFrame += videoSource_NewFrame;
+            videoSource.Start();
         }
+
+        private void videoSource_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            pbInput.Image = (Bitmap)eventArgs.Frame.Clone();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (videoSource != null && videoSource.IsRunning)
+            {
+                videoSource.SignalToStop();
+                videoSource.WaitForStop();
+            }
+        }
+
+        /*  private void timer1_Tick(object sender, EventArgs e)
+          {            
+
+          }*/
+
     }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\C# Projects\\ImageProcessing\\ImageProcessing\\ImageProcessing.csproj": {}
+    "D:\\C# Projects\\ImageProcessing2\\ImageProcessing\\ImageProcessing.csproj": {}
   },
   "projects": {
-    "D:\\C# Projects\\ImageProcessing\\ImageProcessing\\ImageProcessing.csproj": {
+    "D:\\C# Projects\\ImageProcessing2\\ImageProcessing\\ImageProcessing.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\C# Projects\\ImageProcessing\\ImageProcessing\\ImageProcessing.csproj",
+        "projectUniqueName": "D:\\C# Projects\\ImageProcessing2\\ImageProcessing\\ImageProcessing.csproj",
         "projectName": "ImageProcessing",
-        "projectPath": "D:\\C# Projects\\ImageProcessing\\ImageProcessing\\ImageProcessing.csproj",
+        "projectPath": "D:\\C# Projects\\ImageProcessing2\\ImageProcessing\\ImageProcessing.csproj",
         "packagesPath": "C:\\Users\\hgalo\\.nuget\\packages\\",
-        "outputPath": "D:\\C# Projects\\ImageProcessing\\ImageProcessing\\obj\\",
+        "outputPath": "D:\\C# Projects\\ImageProcessing2\\ImageProcessing\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\hgalo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,6 +39,16 @@
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
+          "dependencies": {
+            "AForge.Video": {
+              "target": "Package",
+              "version": "[2.2.5, )"
+            },
+            "AForge.Video.DirectShow": {
+              "target": "Package",
+              "version": "[2.2.5, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

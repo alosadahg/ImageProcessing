@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             label3 = new Label();
             tableLayoutPanel4 = new TableLayoutPanel();
             btnCopy = new Button();
@@ -42,6 +41,8 @@
             btnUploadImg = new Button();
             tableLayoutPanel2 = new TableLayoutPanel();
             label1 = new Label();
+            cbCameraOpts = new ComboBox();
+            lblCamera = new Label();
             tableLayoutPanel1 = new TableLayoutPanel();
             btnSave = new Button();
             label4 = new Label();
@@ -64,7 +65,6 @@
             button9 = new Button();
             button10 = new Button();
             button11 = new Button();
-            timer1 = new System.Windows.Forms.Timer(components);
             tableLayoutPanel4.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
@@ -236,6 +236,8 @@
             tableLayoutPanel2.Controls.Add(btnCamera, 2, 0);
             tableLayoutPanel2.Controls.Add(label1, 0, 0);
             tableLayoutPanel2.Controls.Add(btnUploadImg, 1, 0);
+            tableLayoutPanel2.Controls.Add(cbCameraOpts, 1, 1);
+            tableLayoutPanel2.Controls.Add(lblCamera, 0, 1);
             tableLayoutPanel2.Location = new Point(579, 3);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 2;
@@ -255,6 +257,29 @@
             label1.Size = new Size(61, 21);
             label1.TabIndex = 1;
             label1.Text = "Source";
+            // 
+            // cbCameraOpts
+            // 
+            tableLayoutPanel2.SetColumnSpan(cbCameraOpts, 2);
+            cbCameraOpts.Dock = DockStyle.Fill;
+            cbCameraOpts.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbCameraOpts.FormattingEnabled = true;
+            cbCameraOpts.Location = new Point(103, 58);
+            cbCameraOpts.Name = "cbCameraOpts";
+            cbCameraOpts.Size = new Size(238, 23);
+            cbCameraOpts.TabIndex = 2;
+            cbCameraOpts.SelectedIndexChanged += cbCameraOpts_SelectedIndexChanged;
+            // 
+            // lblCamera
+            // 
+            lblCamera.Anchor = AnchorStyles.Left;
+            lblCamera.AutoSize = true;
+            lblCamera.Font = new Font("Segoe UI", 11F);
+            lblCamera.Location = new Point(3, 59);
+            lblCamera.Name = "lblCamera";
+            lblCamera.Size = new Size(60, 20);
+            lblCamera.TabIndex = 3;
+            lblCamera.Text = "Camera";
             // 
             // tableLayoutPanel1
             // 
@@ -562,6 +587,7 @@
             Controls.Add(tableLayoutPanel1);
             Name = "Form1";
             Text = "ImageProcessing";
+            FormClosing += Form1_FormClosing;
             tableLayoutPanel4.ResumeLayout(false);
             tableLayoutPanel4.PerformLayout();
             tableLayoutPanel2.ResumeLayout(false);
@@ -616,6 +642,7 @@
         private Button button9;
         private Button button10;
         private Button button11;
-        private System.Windows.Forms.Timer timer1;
+        private ComboBox cbCameraOpts;
+        private Label lblCamera;
     }
 }

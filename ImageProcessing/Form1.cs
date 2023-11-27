@@ -147,7 +147,7 @@ namespace ImageProcessing
         private void btnSubtract_Click(object sender, EventArgs e)
         {
             // ImageProcess.Subtract(ref loaded, ref background, ref processed, 100);
-            Color mygreen = Color.FromArgb(0, 0, 255);
+            Color mygreen = loaded.GetPixel(0,0);
             int greygreen = (mygreen.R + mygreen.G + mygreen.B) / 3;
             int threshold = 5;
             for (int x = 0; x < loaded.Width; x++)
@@ -242,18 +242,18 @@ namespace ImageProcessing
             lblCamera.Visible = true;
             cbCameraOpts.Visible = true;
             devices = DeviceManager.GetAllDevices();
-            foreach (Device device in devices)
+            if(devices.Length > 0)
             {
-                cbCameraOpts.Items.Add(device.Name);
+                selectedDevice = DeviceManager.GetDevice(0);
+                selectedDevice.ShowWindow(pbInput);
             }
-
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            selectedDevice.Sendmessage();
             
         }
+
+      /*  private void timer1_Tick(object sender, EventArgs e)
+        {            
+            
+        }*/
 
         private void cbCameraOpts_SelectedIndexChanged(object sender, EventArgs e)
         {

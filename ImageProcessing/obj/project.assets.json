@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\C# Projects\\Image_Processing\\ImageProcessing\\ImageProcessing\\ImageProcessing.csproj",
+      "projectUniqueName": "D:\\C# Projects\\ImageProcessing\\ImageProcessing\\ImageProcessing.csproj",
       "projectName": "ImageProcessing",
-      "projectPath": "E:\\C# Projects\\Image_Processing\\ImageProcessing\\ImageProcessing\\ImageProcessing.csproj",
+      "projectPath": "D:\\C# Projects\\ImageProcessing\\ImageProcessing\\ImageProcessing.csproj",
       "packagesPath": "C:\\Users\\hgalo\\.nuget\\packages\\",
-      "outputPath": "E:\\C# Projects\\Image_Processing\\ImageProcessing\\ImageProcessing\\obj\\",
+      "outputPath": "D:\\C# Projects\\ImageProcessing\\ImageProcessing\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hgalo\\AppData\\Roaming\\NuGet\\NuGet.Config",

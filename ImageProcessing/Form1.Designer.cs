@@ -41,9 +41,7 @@
             btnCamera = new Button();
             btnUploadImg = new Button();
             tableLayoutPanel2 = new TableLayoutPanel();
-            lblCamera = new Label();
             label1 = new Label();
-            cbCameraOpts = new ComboBox();
             tableLayoutPanel1 = new TableLayoutPanel();
             btnSave = new Button();
             label4 = new Label();
@@ -235,11 +233,9 @@
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Controls.Add(lblCamera, 0, 1);
             tableLayoutPanel2.Controls.Add(btnCamera, 2, 0);
             tableLayoutPanel2.Controls.Add(label1, 0, 0);
             tableLayoutPanel2.Controls.Add(btnUploadImg, 1, 0);
-            tableLayoutPanel2.Controls.Add(cbCameraOpts, 1, 1);
             tableLayoutPanel2.Location = new Point(579, 3);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 2;
@@ -248,17 +244,6 @@
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 29F));
             tableLayoutPanel2.Size = new Size(344, 84);
             tableLayoutPanel2.TabIndex = 3;
-            // 
-            // lblCamera
-            // 
-            lblCamera.Anchor = AnchorStyles.Left;
-            lblCamera.AutoSize = true;
-            lblCamera.Font = new Font("Segoe UI", 12F);
-            lblCamera.Location = new Point(3, 59);
-            lblCamera.Name = "lblCamera";
-            lblCamera.Size = new Size(64, 21);
-            lblCamera.TabIndex = 2;
-            lblCamera.Text = "Camera";
             // 
             // label1
             // 
@@ -270,18 +255,6 @@
             label1.Size = new Size(61, 21);
             label1.TabIndex = 1;
             label1.Text = "Source";
-            // 
-            // cbCameraOpts
-            // 
-            tableLayoutPanel2.SetColumnSpan(cbCameraOpts, 2);
-            cbCameraOpts.Dock = DockStyle.Fill;
-            cbCameraOpts.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbCameraOpts.FormattingEnabled = true;
-            cbCameraOpts.Location = new Point(103, 58);
-            cbCameraOpts.Name = "cbCameraOpts";
-            cbCameraOpts.Size = new Size(238, 23);
-            cbCameraOpts.TabIndex = 3;
-            cbCameraOpts.SelectedIndexChanged += cbCameraOpts_SelectedIndexChanged;
             // 
             // tableLayoutPanel1
             // 
@@ -581,10 +554,6 @@
             button11.Text = "Subtract";
             button11.UseVisualStyleBackColor = true;
             // 
-            // timer1
-            // 
-            timer1.Tick += timer1_Tick;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -647,8 +616,6 @@
         private Button button9;
         private Button button10;
         private Button button11;
-        private Label lblCamera;
-        private ComboBox cbCameraOpts;
         private System.Windows.Forms.Timer timer1;
     }
 }

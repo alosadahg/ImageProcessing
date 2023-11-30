@@ -41,11 +41,7 @@
             btnUploadImg = new Button();
             tableLayoutPanel2 = new TableLayoutPanel();
             label1 = new Label();
-<<<<<<< HEAD
             cbVideoSrc = new ComboBox();
-=======
-            cbCameraOpts = new ComboBox();
->>>>>>> 9b84581eadb7aa2a8be1599ac0d8c8ccd6c5f6e6
             lblCamera = new Label();
             tableLayoutPanel1 = new TableLayoutPanel();
             btnSave = new Button();
@@ -240,11 +236,7 @@
             tableLayoutPanel2.Controls.Add(btnCamera, 2, 0);
             tableLayoutPanel2.Controls.Add(label1, 0, 0);
             tableLayoutPanel2.Controls.Add(btnUploadImg, 1, 0);
-<<<<<<< HEAD
             tableLayoutPanel2.Controls.Add(cbVideoSrc, 1, 1);
-=======
-            tableLayoutPanel2.Controls.Add(cbCameraOpts, 1, 1);
->>>>>>> 9b84581eadb7aa2a8be1599ac0d8c8ccd6c5f6e6
             tableLayoutPanel2.Controls.Add(lblCamera, 0, 1);
             tableLayoutPanel2.Location = new Point(579, 3);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -266,7 +258,6 @@
             label1.TabIndex = 1;
             label1.Text = "Source";
             // 
-<<<<<<< HEAD
             // cbVideoSrc
             // 
             tableLayoutPanel2.SetColumnSpan(cbVideoSrc, 2);
@@ -278,19 +269,6 @@
             cbVideoSrc.Size = new Size(238, 23);
             cbVideoSrc.TabIndex = 2;
             cbVideoSrc.SelectedIndexChanged += cbVideoSrc_SelectedIndexChanged;
-=======
-            // cbCameraOpts
-            // 
-            tableLayoutPanel2.SetColumnSpan(cbCameraOpts, 2);
-            cbCameraOpts.Dock = DockStyle.Fill;
-            cbCameraOpts.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbCameraOpts.FormattingEnabled = true;
-            cbCameraOpts.Location = new Point(103, 58);
-            cbCameraOpts.Name = "cbCameraOpts";
-            cbCameraOpts.Size = new Size(238, 23);
-            cbCameraOpts.TabIndex = 2;
-            cbCameraOpts.SelectedIndexChanged += cbCameraOpts_SelectedIndexChanged;
->>>>>>> 9b84581eadb7aa2a8be1599ac0d8c8ccd6c5f6e6
             // 
             // lblCamera
             // 
@@ -601,11 +579,6 @@
             button11.Text = "Subtract";
             button11.UseVisualStyleBackColor = true;
             // 
-            // timer1
-            // 
-            timer1.Interval = 20;
-            timer1.Tick += timer1_Tick;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -669,12 +642,7 @@
         private Button button9;
         private Button button10;
         private Button button11;
-<<<<<<< HEAD
-        private System.Windows.Forms.Timer timer1;
         private ComboBox cbVideoSrc;
-=======
-        private ComboBox cbCameraOpts;
->>>>>>> 9b84581eadb7aa2a8be1599ac0d8c8ccd6c5f6e6
         private Label lblCamera;
     }
 }

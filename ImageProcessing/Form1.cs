@@ -6,6 +6,7 @@ using ImageProcess2;
 using HNUDIP;
 using AForge.Video;
 using AForge.Video.DirectShow;
+using Timer = System.Windows.Forms.Timer;
 
 namespace ImageProcessing
 {
@@ -32,10 +33,13 @@ namespace ImageProcessing
             Subtract
         }
         public ImageProcessingOption option;
+        Timer timer1;
 
         public Form1()
         {
             InitializeComponent();
+            timer1 = new Timer();
+            timer1.Tick += timer1_Tick;
             lblCamera.Visible = false;
             cbVideoSrc.Visible = false;
         }
@@ -146,8 +150,8 @@ namespace ImageProcessing
 
         private void btnSubtract_Click(object sender, EventArgs e)
         {
-            
-            
+
+
             //setImage(processed, pbOutput);
             option = ImageProcessingOption.Subtract;
             timer1.Start();

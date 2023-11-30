@@ -33,13 +33,6 @@ D:\C# Projects\ImageProcessing\ImageProcessing\obj\Debug\net8.0-windows\refint\I
 D:\C# Projects\ImageProcessing\ImageProcessing\obj\Debug\net8.0-windows\ImageProcessing.pdb
 D:\C# Projects\ImageProcessing\ImageProcessing\obj\Debug\net8.0-windows\ImageProcessing.genruntimeconfig.cache
 D:\C# Projects\ImageProcessing\ImageProcessing\obj\Debug\net8.0-windows\ref\ImageProcessing.dll
-<<<<<<< HEAD
-D:\C# Projects\ImageProcessing\ImageProcessing\bin\Debug\net8.0-windows\AForge.dll
-D:\C# Projects\ImageProcessing\ImageProcessing\bin\Debug\net8.0-windows\AForge.Video.dll
-D:\C# Projects\ImageProcessing\ImageProcessing\bin\Debug\net8.0-windows\AForge.Video.DirectShow.dll
-D:\C# Projects\ImageProcessing\ImageProcessing\obj\Debug\net8.0-windows\ImageProcessing.csproj.AssemblyReference.cache
-D:\C# Projects\ImageProcessing\ImageProcessing\obj\Debug\net8.0-windows\ImageProcessing.csproj.CopyComplete
-=======
 D:\C# Projects\ImageProcessing2\ImageProcessing\bin\Debug\net8.0-windows\ImageProcessing.exe
 D:\C# Projects\ImageProcessing2\ImageProcessing\bin\Debug\net8.0-windows\DIPLib\avicap32.dll
 D:\C# Projects\ImageProcessing2\ImageProcessing\bin\Debug\net8.0-windows\ImageProcessing.deps.json
@@ -63,4 +56,3 @@ D:\C# Projects\ImageProcessing2\ImageProcessing\obj\Debug\net8.0-windows\refint\
 D:\C# Projects\ImageProcessing2\ImageProcessing\obj\Debug\net8.0-windows\ImageProcessing.pdb
 D:\C# Projects\ImageProcessing2\ImageProcessing\obj\Debug\net8.0-windows\ImageProcessing.genruntimeconfig.cache
 D:\C# Projects\ImageProcessing2\ImageProcessing\obj\Debug\net8.0-windows\ref\ImageProcessing.dll
->>>>>>> 9b84581eadb7aa2a8be1599ac0d8c8ccd6c5f6e6

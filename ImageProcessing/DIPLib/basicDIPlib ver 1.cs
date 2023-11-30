@@ -12,7 +12,7 @@ namespace HNUDIP
         public static void copyImage(Bitmap a, Bitmap b)
         {
             BitmapData bmDataB = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-            BitmapData amDataA = a.LockBits(new Rectangle(0, 0, a.Width, a.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb); 
+            BitmapData amDataA = a.LockBits(new Rectangle(0, 0, a.Width, a.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
 
             int strideB = bmDataB.Stride;
             System.IntPtr Scan0B = bmDataB.Scan0;
@@ -33,11 +33,11 @@ namespace HNUDIP
                 {
                     for (int x = 0; x < b.Width; ++x)
                     {
-                        blue = pA[0]; 
+                        blue = pA[0];
                         green = pA[1];
                         red = pA[2];
 
-                        pB[0] = blue; 
+                        pB[0] = blue;
                         pB[1] = green;
                         pB[2] = red;
 
@@ -49,7 +49,7 @@ namespace HNUDIP
             }
 
             b.UnlockBits(bmDataB);
-            a.UnlockBits(amDataA); 
+            a.UnlockBits(amDataA);
         }
 
         public static void Fliphorizontal(ref Bitmap a, ref Bitmap b)
@@ -60,7 +60,7 @@ namespace HNUDIP
                 for (int y = 0; y < a.Height; y++)
                 {
                     Color data = a.GetPixel(x, y);
-                    b.SetPixel(x, (a.Height-1)-y, data);
+                    b.SetPixel(x, (a.Height - 1) - y, data);
                 }
 
             }
@@ -75,7 +75,7 @@ namespace HNUDIP
                 for (int y = 0; y < a.Height; y++)
                 {
                     Color data = a.GetPixel(x, y);
-                    b.SetPixel((a.Width-1)-x, y, data);
+                    b.SetPixel((a.Width - 1) - x, y, data);
                 }
 
             }
@@ -169,21 +169,21 @@ namespace HNUDIP
                 for (int y = 0; y < a.Height; y++)
                 {
                     Color data = a.GetPixel(x, y);
-                    graydata=(byte)((data.R+data.G+data.B)/3);
-                    if(graydata>value)
-                    b.SetPixel(x, y, Color.White);
+                    graydata = (byte)((data.R + data.G + data.B) / 3);
+                    if (graydata > value)
+                        b.SetPixel(x, y, Color.White);
                     else
-                    b.SetPixel(x, y, Color.Black);
-                    
+                        b.SetPixel(x, y, Color.Black);
+
                 }
 
             }
-        
+
         }
 
         public static void Rotate(ref Bitmap a, ref Bitmap b, int value)
         {
-            float angleRadians = (float)(value*Math.PI/180);
+            float angleRadians = (float)(value * Math.PI / 180);
             int xCenter = (int)(a.Width / 2);
             int yCenter = (int)(a.Height / 2);
             int width, height, xs, ys, xp, yp, x0, y0;
@@ -209,7 +209,7 @@ namespace HNUDIP
                 }
             }
         }
-        
+
         public static void Brightness(ref Bitmap a, ref Bitmap b, int value)
         {
             b = new Bitmap(a.Width, a.Height);
@@ -219,11 +219,11 @@ namespace HNUDIP
                 {
                     Color temp = a.GetPixel(x, y);
                     Color changed;
-                    if(value>0)
-                    changed = Color.FromArgb(Math.Min(temp.R + value, 255), Math.Min(temp.G + value, 255), Math.Min(temp.B + value, 255));
+                    if (value > 0)
+                        changed = Color.FromArgb(Math.Min(temp.R + value, 255), Math.Min(temp.G + value, 255), Math.Min(temp.B + value, 255));
                     else
-                    changed = Color.FromArgb(Math.Max(temp.R + value, 0), Math.Max(temp.G + value, 0), Math.Max(temp.B + value, 0));
-                    
+                        changed = Color.FromArgb(Math.Max(temp.R + value, 0), Math.Max(temp.G + value, 0), Math.Max(temp.B + value, 0));
+
                     b.SetPixel(x, y, changed);
                 }
             }
@@ -287,20 +287,20 @@ namespace HNUDIP
             {
                 for (int x = 0; x < a.Width; x++)
                 {
-                  // set the new value of the gray value
+                    // set the new value of the gray value
                     Color temp = Color.FromArgb(Ymap[a.GetPixel(x, y).R], Ymap[a.GetPixel(x, y).G], Ymap[a.GetPixel(x, y).B]);
-                   b.SetPixel(x, y, temp);
+                    b.SetPixel(x, y, temp);
                 }
 
             }
-          
 
-        
+
+
         }
 
-        
 
-        public static void Histogram(ref Bitmap a, ref Bitmap b) 
+
+        public static void Histogram(ref Bitmap a, ref Bitmap b)
         {
             Color sample;
             Color gray;
@@ -316,7 +316,7 @@ namespace HNUDIP
                     a.SetPixel(x, y, gray);
                 }
             }
-            
+
             //histogram 1d data;
             int[] histdata = new int[256]; // array from 0 to 255
             for (int x = 0; x < a.Width; x++)
@@ -347,6 +347,6 @@ namespace HNUDIP
                 }
             }
         }
-        
+
     }
 }

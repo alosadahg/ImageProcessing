@@ -1,14 +1,8 @@
 {
   "version": 2,
-<<<<<<< HEAD
-  "dgSpecHash": "lvmc49JdPs2drjYlxIbTPqglgsJ+SFF/6WR7CqmKgCBYmT2TiM3VPgghx9g67CJXOjoFdan7HKaxYE0Xi5hI+g==",
-  "success": true,
-  "projectFilePath": "D:\\C# Projects\\ImageProcessing\\ImageProcessing\\ImageProcessing.csproj",
-=======
   "dgSpecHash": "rNnUF28flqN8LEsS/+iF40+DzYfuc73q7AIyQN2xItBhN3vdW9JEtP4/E5KLleMC6GwHJOZujkt+PNaGmIwuzw==",
   "success": true,
   "projectFilePath": "D:\\C# Projects\\ImageProcessing2\\ImageProcessing\\ImageProcessing.csproj",
->>>>>>> 9b84581eadb7aa2a8be1599ac0d8c8ccd6c5f6e6
   "expectedPackageFiles": [
     "C:\\Users\\hgalo\\.nuget\\packages\\aforge\\2.2.5\\aforge.2.2.5.nupkg.sha512",
     "C:\\Users\\hgalo\\.nuget\\packages\\aforge.video\\2.2.5\\aforge.video.2.2.5.nupkg.sha512",

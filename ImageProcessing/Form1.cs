@@ -21,11 +21,23 @@ namespace ImageProcessing
         Device[] devices;
         FilterInfoCollection videoDevices;
         VideoCaptureDevice videoSource;
+        bool toCopy, toGreyscale, toInvert, toSepia, toHistogram, toSubtract;
+        public enum ImageProcessingOption
+        {
+            Copy,
+            Greyscale,
+            Invert,
+            Histogram,
+            Sepia,
+            Subtract
+        }
+        public ImageProcessingOption option;
+
         public Form1()
         {
             InitializeComponent();
             lblCamera.Visible = false;
-            cbCameraOpts.Visible = false;
+            cbVideoSrc.Visible = false;
         }
 
         private void btnUploadImg_Click(object sender, EventArgs e)
@@ -35,10 +47,10 @@ namespace ImageProcessing
                 videoSource.SignalToStop();
                 videoSource.WaitForStop();
             }
-            /*if (selectedDevice != null)
-                selectedDevice.Stop();*/
             lblCamera.Visible = false;
-            cbCameraOpts.Visible = false;
+            cbVideoSrc.Visible = false;
+            if (selectedDevice != null)
+                selectedDevice.Stop();
             OpenFileDialog open = new OpenFileDialog();
             open.ShowDialog();
             try
@@ -66,41 +78,20 @@ namespace ImageProcessing
 
         private void btnCopy_Click(object sender, EventArgs e)
         {
-            Color pixel;
-
-            for (int x = 0; x < loaded.Width; x++)
-            {
-                for (int y = 0; y < loaded.Height; y++)
-                {
-                    pixel = loaded.GetPixel(x, y);
-                    processed.SetPixel(x, y, pixel);
-                }
-            }
-            setImage(processed, pbOutput);
+            option = ImageProcessingOption.Copy;
+            timer1.Start();
         }
 
         private void btnGreyscale_Click(object sender, EventArgs e)
         {
-            processed = getGreyscale(loaded);
-            setImage(processed, pbOutput);
+            option = ImageProcessingOption.Greyscale;
+            timer1.Start();
         }
 
         private void btnInvert_Click(object sender, EventArgs e)
         {
-            Color pixel;
-
-            for (int x = 0; x < loaded.Width; x++)
-            {
-                for (int y = 0; y < loaded.Height; y++)
-                {
-                    pixel = loaded.GetPixel(x, y);
-                    int r = 255 - pixel.R;
-                    int g = 255 - pixel.G;
-                    int b = 255 - pixel.B;
-                    processed.SetPixel(x, y, Color.FromArgb(r, g, b));
-                }
-            }
-            setImage(processed, pbOutput);
+            option = ImageProcessingOption.Invert;
+            timer1.Start();
         }
 
         private void btnHistogram_Click(object sender, EventArgs e)
@@ -155,29 +146,11 @@ namespace ImageProcessing
 
         private void btnSubtract_Click(object sender, EventArgs e)
         {
-            // ImageProcess.Subtract(ref loaded, ref background, ref processed, 100);
-            Color mygreen = loaded.GetPixel(0, 0);
-            int greygreen = (mygreen.R + mygreen.G + mygreen.B) / 3;
-            int threshold = 5;
-            for (int x = 0; x < loaded.Width; x++)
-            {
-                for (int y = 0; y < loaded.Height; y++)
-                {
-                    Color pixel = loaded.GetPixel(x, y);
-                    Color backpixel = background.GetPixel(x, y);
-                    int grey = (pixel.R + pixel.G + pixel.B) / 3;
-                    int subtractvalue = Math.Abs(grey - greygreen);
-                    if (subtractvalue > threshold)
-                    {
-                        processed.SetPixel(x, y, pixel);
-                    }
-                    else
-                    {
-                        processed.SetPixel(x, y, backpixel);
-                    }
-                }
-            }
-            setImage(processed, pbOutput);
+            
+            
+            //setImage(processed, pbOutput);
+            option = ImageProcessingOption.Subtract;
+            timer1.Start();
         }
 
         private void btnBackground_Click(object sender, EventArgs e)
@@ -248,29 +221,35 @@ namespace ImageProcessing
 
         private void btnCamera_Click(object sender, EventArgs e)
         {
-            /*lblCamera.Visible = true;
-            cbCameraOpts.Visible = true;
-            devices = DeviceManager.GetAllDevices();
-            if (devices.Length > 0)
+            //Using WebCamLib
+            /*devices = DeviceManager.GetAllDevices();
+            if(devices.Length > 0)
             {
                 selectedDevice = DeviceManager.GetDevice(0);
                 selectedDevice.ShowWindow(pbInput);
             }*/
+            cbVideoSrc.Items.Clear();
             lblCamera.Visible = true;
-            cbCameraOpts.Visible = true;
+            cbVideoSrc.Visible = true;
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             foreach (FilterInfo device in videoDevices)
             {
-                cbCameraOpts.Items.Add(device.Name);
+                cbVideoSrc.Items.Add(device.Name);
             }
             videoSource = new VideoCaptureDevice();
         }
 
-        private void cbCameraOpts_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbVideoSrc_SelectedIndexChanged(object sender, EventArgs e)
         {
-            videoSource = new VideoCaptureDevice(videoDevices[cbCameraOpts.SelectedIndex].MonikerString);
+            videoSource = new VideoCaptureDevice(videoDevices[cbVideoSrc.SelectedIndex].MonikerString);
             videoSource.NewFrame += videoSource_NewFrame;
             videoSource.Start();
+            btnBackground.Enabled = true;
+            btnCopy.Enabled = true;
+            btnGreyscale.Enabled = true;
+            btnHistogram.Enabled = true;
+            btnSepia.Enabled = true;
+            btnInvert.Enabled = true;
         }
 
         private void videoSource_NewFrame(object sender, NewFrameEventArgs eventArgs)
@@ -287,10 +266,55 @@ namespace ImageProcessing
             }
         }
 
-        /*  private void timer1_Tick(object sender, EventArgs e)
-          {            
-
-          }*/
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            loaded = (Bitmap)pbInput.Image;
+            processed = (Bitmap)loaded.Clone();
+            switch (option)
+            {
+                case ImageProcessingOption.Copy:
+                    ImageProcess.copyImage(loaded, processed);
+                    break;
+                case ImageProcessingOption.Greyscale:
+                    BitmapFilter.GrayScale(processed);
+                    break;
+                case ImageProcessingOption.Invert:
+                    BitmapFilter.Invert(processed);
+                    break;
+                case ImageProcessingOption.Histogram:
+                    //GenerateHistogram();
+                    break;
+                case ImageProcessingOption.Sepia:
+                    //ApplySepia();
+                    break;
+                case ImageProcessingOption.Subtract:
+                    //ImageProcess.Subtract(loaded, background, processed, 5);
+                    Color mygreen = loaded.GetPixel(0, 0);
+                    int greygreen = (mygreen.R + mygreen.G + mygreen.B) / 3;
+                    int threshold = 5;
+                    for (int x = 0; x < loaded.Width; x++)
+                    {
+                        for (int y = 0; y < loaded.Height; y++)
+                        {
+                            Color pixel = loaded.GetPixel(x, y);
+                            Color backpixel = background.GetPixel(x, y);
+                            int grey = (pixel.R + pixel.G + pixel.B) / 3;
+                            int subtractvalue = Math.Abs(grey - greygreen);
+                            if (subtractvalue > threshold)
+                            {
+                                processed.SetPixel(x, y, pixel);
+                            }
+                            else
+                            {
+                                processed.SetPixel(x, y, backpixel);
+                            }
+                        }
+                    }
+                    //ImageProcess.Subtract(ref loaded, ref background, ref processed, 5);
+                    break;
+            }
+            setImage(processed, pbOutput);
+        }
 
     }
 }

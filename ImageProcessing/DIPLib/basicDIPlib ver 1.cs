@@ -2,25 +2,54 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace HNUDIP
 {
     static class ImageProcess
     {
 
-        public static void copyImage(ref Bitmap a, ref Bitmap b)
+        public static void copyImage(Bitmap a, Bitmap b)
         {
-            b = new Bitmap(a.Width, a.Height);
-            for (int x = 0; x < a.Width; x++)
+            BitmapData bmDataB = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            BitmapData amDataA = a.LockBits(new Rectangle(0, 0, a.Width, a.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb); 
+
+            int strideB = bmDataB.Stride;
+            System.IntPtr Scan0B = bmDataB.Scan0;
+
+            int strideA = amDataA.Stride;
+            System.IntPtr Scan0A = amDataA.Scan0;
+
+            unsafe
             {
-                for (int y = 0; y < a.Height; y++)
+                byte* pB = (byte*)(void*)Scan0B;
+                byte* pA = (byte*)(void*)Scan0A;
+
+                int nOffsetB = strideB - b.Width * 3;
+
+                byte red, green, blue;
+
+                for (int y = 0; y < b.Height; ++y)
                 {
-                    Color data = a.GetPixel(x, y);
-                    b.SetPixel(x, y, data);
-                 }
-                
+                    for (int x = 0; x < b.Width; ++x)
+                    {
+                        blue = pA[0]; 
+                        green = pA[1];
+                        red = pA[2];
+
+                        pB[0] = blue; 
+                        pB[1] = green;
+                        pB[2] = red;
+
+                        pA += 3;
+                        pB += 3;
+                    }
+                    pB += nOffsetB;
+                }
             }
-        
+
+            b.UnlockBits(bmDataB);
+            a.UnlockBits(amDataA); 
         }
 
         public static void Fliphorizontal(ref Bitmap a, ref Bitmap b)
@@ -73,29 +102,61 @@ namespace HNUDIP
             }
         }
 
-        public static void Subtract(ref Bitmap a, ref Bitmap b,ref Bitmap result, int value)
+        public static void Subtract(Bitmap loaded, Bitmap background, Bitmap result, int threshold)
         {
-            result = new Bitmap(a.Width, a.Height);
-            byte agraydata = 0;
-            byte bgraydata = 0;
-            for (int x = 0; x < a.Width; x++)
+            BitmapData bmDataResult = result.LockBits(new Rectangle(0, 0, result.Width, result.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            BitmapData amDataLoaded = loaded.LockBits(new Rectangle(0, 0, loaded.Width, loaded.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+            BitmapData bmDataBackground = background.LockBits(new Rectangle(0, 0, background.Width, background.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+
+            int strideResult = bmDataResult.Stride;
+            IntPtr scan0Result = bmDataResult.Scan0;
+
+            int strideLoaded = amDataLoaded.Stride;
+            IntPtr scan0Loaded = amDataLoaded.Scan0;
+
+            int strideBackground = bmDataBackground.Stride;
+            IntPtr scan0Background = bmDataBackground.Scan0;
+
+            unsafe
             {
-                for (int y = 0; y < a.Height; y++)
+                byte* pResult = (byte*)(void*)scan0Result;
+                byte* pLoaded = (byte*)(void*)scan0Loaded;
+                byte* pBackground = (byte*)(void*)scan0Background;
+
+                int nOffsetResult = strideResult - result.Width * 3;
+                int nOffsetLoaded = strideLoaded - loaded.Width * 3;
+                int nOffsetBackground = strideBackground - background.Width * 3;
+
+                int greygreen = (pLoaded[2] + pLoaded[1] + pLoaded[0]) / 3;
+                for (int x = 0; x < result.Width; ++x)
                 {
-                    Color adata = a.GetPixel(x, y);
-                    Color bdata = b.GetPixel(x, y);
+                    for (int y = 0; y < result.Height; ++y)
+                    {
+                        int greyBackground = (pBackground[0] + pBackground[1] + pBackground[2]) / 3;
 
-                    agraydata = (byte)((adata.R + adata.G + adata.B) / 3);
-                    bgraydata = (byte)((bdata.R + bdata.G + bdata.B) / 3);
-                    if (Math.Abs(agraydata-bgraydata) > value)
-                        result.SetPixel(x, y, Color.Red);
-                    else
-                        result.SetPixel(x, y,bdata);
+                        int subtractValue = Math.Abs(greygreen - greyBackground);
 
+                        int blue = subtractValue > threshold ? pLoaded[0] : pBackground[0];
+                        int green = subtractValue > threshold ? pLoaded[1] : pBackground[1];
+                        int red = subtractValue > threshold ? pLoaded[2] : pBackground[2];
+
+                        pResult[0] = (byte)blue;
+                        pResult[1] = (byte)green;
+                        pResult[2] = (byte)red;
+
+                        pLoaded += 3;
+                        pBackground += 3;
+                        pResult += 3;
+                    }
+                    pResult += nOffsetResult;
+                    pLoaded += nOffsetLoaded;
+                    pBackground += nOffsetBackground;
                 }
-
             }
 
+            result.UnlockBits(bmDataResult);
+            loaded.UnlockBits(amDataLoaded);
+            background.UnlockBits(bmDataBackground);
         }
 
 
